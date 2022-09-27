@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+header nav{
+    height: 80px;
+    background-color: gray;
+}
+header nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+header nav ul li{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
