@@ -162,3 +162,105 @@ let nombres = ["perez", "vero", "manu", "fer", "pri"]
 let nuevoArray = nombres.slice(1,4)
 //nuevoArray = ["vero", "manu", "fer"]
 
+
+
+//FUNCIONES DE ORDEN SUPERIOR
+// la funcion de orden superior es la que recibe o devuelve una funcion
+
+function porCadaUno(array, fn){
+    for(const elemento of array){
+        fn(elemento)
+    }
+}
+
+//le mandamos el array y la funcion
+
+porCadaUno([1,2,3,4], console.log)
+
+//ForEach, itera sobre el array y le aplica la funcion a los elementos
+
+let numeros = [1,2,3,4,5,6]
+
+numeros.forEach((num) =>{
+    console.log(num)
+})
+
+//num es la variable que usamos para iterar sobre el array, igual que elemento
+//en la funcion de porCadaUno
+
+
+//METODO FIND
+/*
+El metodo find recibe una funcion de comparación por parametro.
+ o sea, recorre un array completo, compara lo que le pedimos, y nos lo 
+ devuelve. 
+ Se puede implementar como busqueda de productos
+
+*/ 
+
+
+//Definimos un array(consolas) que tiene 3 objetos, con 2 valores.
+let consolas = [
+    {nombre: "Playstation 2", precio:5000},
+    {nombre: "Xbox One", precio:10000},
+    {nombre: "Playstation 4", precio:15000},
+]
+
+let resultadoConsola = prompt("Ingrese el nombre de la consola:")
+let buscar = consolas.find((elemento) => elemento.nombre === resultadoConsola)
+
+
+//METODO FILTER, muy util para todooo
+/*
+El metodo fliter es parecio al find, solo que el filter te retorna TODOS
+los elementos que correspondan con el parametro.
+*/
+
+//Definimos el array(ropa), que tiene varios elementos.
+let ropa = [
+    {nombre:"Pantalon B" , precio:3000 },
+    {nombre:"Pantalon White", precio: 1500},
+    {nombre:"Remera suave" ,precio: 2600},
+    {nombre:"Short de playa" ,precio: 2200},
+]
+
+let ropaIngreso = prompt ("Ingrese la ropa que quiere: ")
+let resultadoRopa = ropa.filter((el)=> el.nombre.includes("Pantalon"))
+
+//Nos va a devolver TODOS los objetos que incluyan la palabra "Pantalon" en
+//la propiedad nombre.
+console.log(resultadoRopa)
+
+
+
+//METODO SORT
+//Con el metodo sort podemos ordenar un array de menor a mayor o viceversa
+//Se puede usar para, por ej, ordenar por precio de menor a mayor
+
+
+//NUMEROS
+const numerosSort = [40, 1, 5, 200]
+numerosSort.sort((a, b) => a -b); // [1, 5, 40, 200]
+numerosSort.sort((a, b) => b -a); // [200, 40, 5, 1]
+
+
+//STRINGS
+const items = [
+    //Si las primeras letras son iguales, pasa a la 2da.
+    { nombre: "Pedro", edad: 20},
+    { nombre: "Juan", edad: 19},
+    { nombre: "Agustin", edad:44},
+    { nombre: "Zorman", edad: 37}
+]
+items.sort((a,b) =>{
+    if (a.name > b.name) {
+        return 1;
+    }
+    if (a.name < b.name) {
+        return -1;
+    }
+
+    // si a es igual b
+    return 0;
+})
+
