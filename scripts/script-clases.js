@@ -264,3 +264,66 @@ items.sort((a,b) =>{
     return 0;
 })
 
+
+
+
+// DOM: Estructura del documento html que se usa en JS
+
+// existen varios metodos para traer elementos del html al js, los más 
+// comúnes son: 
+// GetElementById --> trae un elemento por el ID
+// GetElementsByClassName --> trae elementos que usan la misma class
+// GetElementsByTagName --> trae elementos usando el nombre de la etiqueta, casi ni se usa
+
+//Podemos crearlos también:
+// createElement --> agregamos el elemento que querramos.
+
+// let card = document.createElement("div") --> le creamos un div
+
+// card.innerHTML = "<h2>Subtitulo</h2>" --> al div que creamos le agregamos un h2
+
+// Con el siguiente comando podemos AGREGAR un elemento hijo a nuestro elemento padre.
+
+// traemos nuestro elemento padre: 
+let catalago = document.GetElementById("catalogo")
+
+// le agregamos la card que creamos
+catalogo.append(card)
+
+
+//Después tenemos metodos para cambiar el texto, o agregar codigo en el html
+innerText --> //cambiamos el texto que se encuentre en el nodo(etiqueta)
+innerHTML --> //podemos agregar lineas de codigo al html, por ej, elemento.innerHTML = "<h2>Esto se añadio por js</h2>"
+
+//Podremos modificar o agregarle clases a un nodo 
+//HTML:
+<div id = "container" > esto es una caja </div>
+
+//JS:
+let cajaUno = document.GetElementById("container")
+
+cajaUno.innerHTML = "<h2>Agregamos subtitulo/h2>"
+cajaUno.className = "juegos"
+
+//HTML:
+//<div id = "container" class = "juegos" > esto es una caja <h2>Agregamos subtitulo</h2> </div>
+
+//SI SE TIENE MÁS DE UN ELEMENTO EN UN NODO, SE PUEDE ACCEDER A ÉL ASÍ:
+
+//HTML: 
+{/* <div>
+    <div class = "card"></div>
+    <div class = "card"></div>
+    <div class = "card"></div>
+</div> */}
+
+//Si nosotros solo queremos cambiar UNA card de las TRES que hay, usamos nuestra variable como array.
+
+//JS:
+let container = container.GetElementsByClassName("card")
+
+container[1].className = "card-js"
+
+// ESTO SIGNIFICA QUE AGARRAMOS LA 2DA CARD Y LE CAMBIAMOS EL NOMBRE DE CLASE.
+// si queremos usar la primera ponemos 0
+

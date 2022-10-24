@@ -1,0 +1,60 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+nav{
+    background-color: #005606;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    .nav_lista{
+        display: flex;
+        margin-right: 20px;
+        .nav_items{
+            font-size: 1.2rem;
+            padding: 8px;
+            display: flex;
+            a{
+                color: white;
+            }
+        }
+    }
+}
+main{
+    h1{
+        text-align: center;
+        margin: 30px 0;
+    }
+    p{
+        text-align: center;
+        margin: 0 20%;
+    }
+    #consolas{
+        display: flex;
+        justify-content: center;
+        .card_consolas{
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            margin: 15px 15px;
+            background-color: #8ddb93;
+            .btn_cards{
+                margin: 4px 0 0 0;
+                padding: 7px;
+
+            }
+            .img_cards{
+                height: 140px;
+                width: 100%;
+            }
+        }
+    }
+}
