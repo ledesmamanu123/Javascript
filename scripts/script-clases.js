@@ -327,3 +327,50 @@ container[1].className = "card-js"
 // ESTO SIGNIFICA QUE AGARRAMOS LA 2DA CARD Y LE CAMBIAMOS EL NOMBRE DE CLASE.
 // si queremos usar la primera ponemos 0
 
+
+// OTRA FORMA DE CREAR CARDS
+
+//declaramos la funcion contructora
+function Productos_dos(id, nombre, stock, precio) {
+    this.id = id,
+    this.nombre = nombre,
+    this.stock = stock,
+    this.precio = precio
+}
+
+//cargamos los productos
+let sGalaxy = new Productos_dos(1,"Samsung Galaxy",10,1200)
+let motoG4 = new Productos_dos(2,"Motorola G4", 9,600)
+let motoX = new Productos_dos(3,"Motorola X",4 ,700)
+let iphone14 = new Productos_dos(4,"Iphone 14",8,1500)
+
+//declaramos un array con los productos cargados
+let arrayProductos = [sGalaxy, motoG4, motoX, iphone14]
+
+arrayProductos.forEach(prod => {
+    //creamos la card
+    let card = document.createElement('div')
+    card.classList.add('card-body')
+    //Titulo
+    let card_titulo = document.createElement('h4')
+    card_titulo.classList.add('card-titulo')
+    card_titulo.innerText(`${prod.nombre}`)
+    //Precio
+    let card_precio = document.createElement('p')
+    card_precio.classList.add('card-precio')
+    card_precio.innerText(`$${prod.precio}`)
+    //Stock
+    let card_stock = document.createElement('p')
+    card_stock.innerText(`Stock disponible: ${prod.stock}`)
+    //Boton
+    let card_button = document.createElement('button')
+    card_button.classList.add('card-btn')
+    card_button.setAttribute("id",prod.id)
+    card_button.addEventListener("click",AgregarAlCarrito)
+
+    card.append(card_titulo)
+    card.append(card_precio)
+    card.append(card_stock)
+    card.append(card_button)
+});
+

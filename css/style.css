@@ -47,3 +47,19 @@ main #consolas {
     main #consolas .card_consolas .img_cards {
       height: 140px;
       width: 100%; }
+
+#catalogo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+  #catalogo .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ff7777;
+    padding: 10px; }
+    #catalogo .card-body .card-titulo {
+      font-size: 1.5rem;
+      color: white;
+      background-color: black;
+      padding: 5px; }
