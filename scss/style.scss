@@ -11,10 +11,10 @@ nav{
     height: 5rem;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-evenly;
     .nav_lista{
         display: flex;
-        margin-right: 20px;
+        margin-left: 20px;
         .nav_items{
             font-size: 1.2rem;
             padding: 8px;
@@ -22,6 +22,29 @@ nav{
             a{
                 color: white;
             }
+        }
+    }
+}
+.nav_carrito{
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+    .item_carrito{
+        .img_carrito{
+            height: 70px;
+            width: 100%;
+        }
+        background-color: #8ddb93;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .titulo_carrito{
+            color: white;
+            font-size: 1.2rem;
+        }
+        .btn_carrito{
+            height: 20px;
+            width: 20px;
         }
     }
 }

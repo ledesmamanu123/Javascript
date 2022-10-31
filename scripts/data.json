@@ -1,0 +1,50 @@
+[
+    {   
+        "id": 1,
+        "nombre": "Playstation 2",
+        "precio": 200,
+        "stock": 1,
+        "marca": "Sony",
+        "img" : "../img/fondo-cards.jpg"
+    },
+    {   
+        "id": 2,
+        "nombre": "Playstation 4",
+        "precio": 400,
+        "stock": 5,
+        "marca": "Sony",
+        "img" : "../img/fondo-cards-ps4.jpg"
+    },
+    {   
+        "id": 3,
+        "nombre": "Xbox",
+        "precio": 390,
+        "stock": 5,
+        "marca": "Microsoft",
+        "img" : "../img/fondo-cards-xb.jpg"
+    },
+    {   
+        "id": 4,
+        "nombre": "Wii",
+        "precio": 200,
+        "stock": 3,
+        "marca": "Nintendo",
+        "img" : "../img/fondo-cards-wii.jpg"
+    },
+    {   
+        "id": 5,
+        "nombre": "Nintendo Switch",
+        "precio": 450,
+        "stock": 2,
+        "marca": "Nintendo",
+        "img" : "../img/fondo-cards-ns.jpg"
+    },
+    {   
+        "id": 6,
+        "nombre": "Steam Deck",
+        "precio": 350,
+        "stock": 10,
+        "marca": "Valve",
+        "img" : "../img/fondo-cards-sd.jpg"
+    }
+]
