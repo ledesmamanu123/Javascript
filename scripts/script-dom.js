@@ -1,72 +1,77 @@
-//Funcion Constructora de productos
-function productos (id, nombre, precio, stock, img, marca){
-    this.id = id;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.stock = stock;
-    this.img = img;
-    this.marca = marca;
-
-}
-
-let ps2 = new productos (1, "Playstation 2", 200, 1, "../img/fondo-cards.jpg", "Sony")
-let ps4 = new productos (2, "Playstation 4", 400, 5, "../img/fondo-cards-ps4.jpg", "Sony")
-let xb = new productos (3, "Xbox", 390, 5, "../img/fondo-cards-xb.jpg", "Microsoft")
-let wii = new productos (4, "Wii", 200, 3, "../img/fondo-cards-wii.jpg", "Nintendo")
-let ns = new productos (5, "Nintendo Switch", 450, 2, "../img/fondo-cards-ns.jpg", "Nintendo")
-let sd = new productos (6, "Steam Deck", 350, 10, "../img/fondo-cards-sd.jpg", "Valve")
-let ps3 = new productos (7, "Playstation 3", 250, 4, "../img/fondo-cards.jpg", "Sony")
-
-//Declaramos un array con los productos cargados
-let lista_productos = [ps2, ps4, xb, wii, ns, sd, ps3]
-
-//Filtramos nuestro array de productos para que, si no hay stock, no lo muestre, y lo guardamos en un nuevo array
-let lista_stock = lista_productos.filter((el) => el.stock > 0)
-
-//Ultilizamos el metodo map para crear otro array pero con solo el nombre de los productos
-let lista_nombres = lista_stock.map((el) => el.nombre)
-
-//Variable de precio final
-precioTotal = 0
-
-//Declaramos la función suma
-function suma(cant, precio){
-   return cant*precio
-}
 
 //Traemos la seccion de consolas para trabajar sobre ella
 let seccion_consolas = document.getElementById("consolas")
+
+//Usamos la informacion desde data.json
+fetch('../data/data.json')
+.then((response)=>response.json())
+.then((data)=> render(data))
+.catch((data)=>console.log(data))
+
+
+function render(datos){
+    seccion_consolas.innerHTML = ""
+
+    for (const prod of datos) {
+
+        let card = document.createElement('div')
+        card.classList.add("card_consolas")
+        //img
+        let imgCard =  document.createElement('img')
+        imgCard.classList.add("img_cards")
+        imgCard.setAttribute("src",prod.img)
+        //titulo
+        let tituloCard = document.createElement('h2')
+        tituloCard.classList.add("titulo_cards")
+        tituloCard.innerText = `${prod.nombre}`
+        //precio
+        let precioCard = document.createElement('span')
+        precioCard.innerText = `${prod.precio}`
+        //btn
+        let btnCard = document.createElement('button')
+        btnCard.classList.add("btn_cards")
+        btnCard.setAttribute("id",prod.id)
+        btnCard.innerText = `Agregar`
+        btnCard.addEventListener('click',agregarProducto)
+
+        card.append(imgCard)
+        card.append(tituloCard)
+        card.append(precioCard)
+        card.append(btnCard)
+
+        seccion_consolas.append(card)
+
+        lista_productos.push(prod)
+    }
+}
+
+let lista_productos = []
 
 //Traemos la ul donde vamos a cargar los productos
 let listaCarrito = document.getElementById("lista_carrito")
 //Creamos el array donde se va a almacenar los productos que eligamos
 let carrito = []
+
 cargarStorage()
 renderCarrito()
-for (const x of lista_stock) {
-    //creamos las cards
-    let card = document.createElement("div")
-    card.innerHTML = 
-    `<img src ="${x.img}" alt ="img consola" class= "img_cards"></img>
-    <h2>${x.nombre}</h2>
-    <p>Precio: ${x.precio}</p>
-    <p>Stock disponible:${x.stock}</p>
-    <button id ="${x.id}" class ="btn_cards">Agregar</button>`
-    card.className = "card_consolas"
-    seccion_consolas.append(card)
-}
-
-//Agregamos un evento de escucha
-seccion_consolas.addEventListener("click", agregarProducto)
 
 //Funcion para acceder a los id de las cards
 function agregarProducto(prod){
-    if (prod.target.classList.contains("btn_cards")){
         let id = prod.target.getAttribute('id')
         //agregamos el id al array carrito
         carrito.push(id)
         renderCarrito()
-    }
+
+        //Cada vez q pusheamos un nuevo producto al array de carrito, ejecutamos un toastify
+        Toastify({
+            text: "Agregado correctamente",
+            className: "info",
+            gravity: "bottom",
+            duration: 1500,
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            }
+          }).showToast();
 }
 
 function renderCarrito(){
@@ -77,10 +82,13 @@ function renderCarrito(){
     no lo va a tomar.
     En criollo: con los (...) sacamos los numeros de adentro del array, con el new lo trasnformamos en objeto, y con el set tomamos solo valores únicos.*/
     let carritoSinRepetir = [... new Set(carrito)]
-    carritoSinRepetir.forEach((x)=>{ //=> con el id q nos llega, lo comparamos con el id de el array lista_stock, y lo guardamos en un NUEVO ARRAY(ya que el filter nos crea un nuevo array).     
-        let item = lista_stock.filter((el)=>{ 
-            return el.id == x
+    carritoSinRepetir.forEach((x)=>{ //=> con el id q nos llega, lo comparamos con el id de el array lista_productos, y lo guardamos en un NUEVO ARRAY(ya que el filter nos crea un nuevo array).
+        let item = lista_productos.filter((el) => {
+          return el.id == x
         })
+        let cantidad = carrito.reduce((acum, id)=>{  //Con un reduce, a cada objeto lo 
+            return id === x ? acum += 1 : acum
+        },0)
         //creamos las cards de carrito
         let linea = document.createElement('li')
         //div contenedor
@@ -99,7 +107,7 @@ function renderCarrito(){
         precioCarrito.innerText = `$${item[0].precio}`
         //cantidad
         let cantCarrito = document.createElement('span')
-        //precioCarrito.innerText =
+        cantCarrito.innerText = `${cantidad}`
         //button
         let btnCarrito = document.createElement('button')
         btnCarrito.innerText = `X`
@@ -111,12 +119,11 @@ function renderCarrito(){
         divCarrito.append(imgCarrito)
         divCarrito.append(tituloCarrito)
         divCarrito.append(precioCarrito)
+        divCarrito.append(cantCarrito)
         divCarrito.append(btnCarrito)
         linea.append(divCarrito)
-        listaCarrito.append(linea)
 
-        //Guardamos los productos en el carrito
-        
+        listaCarrito.append(linea)
     })
 }
 
@@ -126,6 +133,15 @@ function borrarProducto(e){
         return cartId != id;
     })
     renderCarrito()
+    Toastify({
+        text: "Eliminado",
+        className: "info",
+        gravity: "bottom",
+        duration: 1500,
+        style: {
+          background: "#BB0000",
+        }
+      }).showToast();
 }
 
 

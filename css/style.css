@@ -51,6 +51,8 @@ main p {
 main #consolas {
   display: flex;
   justify-content: center; }
+  main #consolas .titulo_cards {
+    font-size: 1.5rem; }
   main #consolas .card_consolas {
     height: auto;
     width: 100%;
