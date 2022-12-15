@@ -1,0 +1,10 @@
+.title_cart{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    font-size: 1.2rem;
+}
+nav{
+    background-color: rgb(84, 156, 238);
+}
