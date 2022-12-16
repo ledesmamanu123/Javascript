@@ -1,16 +1,17 @@
 import React from 'react'
+import Item from '../Item/Item'
 const ItemList = ({items}) => {
-  console.log({items})
   return (
     <>
-    {items.map((item ,index)=>{
-      return <div className='CardContainer' key={index}>
-                <h3>{item.title}</h3>
-                <img src={item.imgUrl} alt={items.title} />
-                <p>{item.stock}</p>
-              </div>
-    })}
-    </>
+      {items.map((item, index)=>{ return <Item 
+      key = {index}
+      id = {item.id}
+      title = {item.title}
+      img = {item.imgUrl}
+      price = {item.price}
+      description = {item.description}
+      stock = {item.stock} />
+    })}</>
   )
 }
 

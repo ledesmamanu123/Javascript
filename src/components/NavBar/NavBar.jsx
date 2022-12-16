@@ -1,7 +1,6 @@
 import React from 'react'
 import CartWidget from '../CartWidget/CartWidget'
 import ItemListContainer from '../ItemListContainer/ItemListContainer'
-import Item from '../Item/Item'
 import Title from '../Title/Title'
 import './NavBar.css'
 const NavBar = () => {
