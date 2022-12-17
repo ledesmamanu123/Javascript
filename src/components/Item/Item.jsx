@@ -12,8 +12,8 @@ const Item = (props, {key}) => {
         <div>
           <p>{props.stock}</p>
           <span>$ {props.price}</span>
+          <p>{props.desc}</p>
         </div>
-
       </div>
     </>
   )

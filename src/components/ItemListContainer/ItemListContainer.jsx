@@ -4,7 +4,6 @@ import Consolas from '../icons/Consolas';
 import Accesorios from '../icons/Accesorios';
 import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css'
-import Item from '../Item/Item';
 const ItemListContainer = () => {
     const categories = [
         {id: 1, name:"Juegos", icon:<Juegos />},
@@ -21,25 +20,26 @@ const ItemListContainer = () => {
     //Creamos la promise
     const getProducts = new Promise((resolve)=>{
         setTimeout(()=>{
-        resolve(products)
-        },2000)
+            resolve(products)
+        },2000);
     })
+
     //Creamos la funcion de resuelto
     function isResolved (resolve){
-        <>
-        <ItemList items={resolve} />
-        </>
+       <ItemList items={resolve} />
+       console.log(resolve)
     }
+
     //Le decimos a la promise que ejecute la funcion
-    getProducts.then(isResolved, "Esto es un error")
+    getProducts.then(isResolved)
+
   return (
     <>
         <ul className='lista_categorias'>
             {categories.map((category, index)=>{
-                return <li className='item_categorias'> {category.icon} <a href='#' key={index} id={category.id}>{category.name}</a></li>
+                return <li className='item_categorias' key={index} id={category.id}> {category.icon} {category.name}</li>
             })}
         </ul>
-        <Item />
     </>
   )
 }
