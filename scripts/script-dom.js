@@ -9,6 +9,19 @@ fetch('../data/data.json')
 .catch((data)=>console.log(data))
 
 
+//Traemos la ul donde vamos a cargar los productos
+let listaCarrito = document.getElementById("lista_carrito")
+
+//Creamos el array donde se va a almacenar los productos que eligamos
+let carrito = []
+
+let listaProductos = []
+
+console.log(carrito)
+cargarStorage()
+console.log(carrito)
+renderCarrito()
+
 function render(datos){
     seccion_consolas.innerHTML = ""
 
@@ -41,19 +54,9 @@ function render(datos){
 
         seccion_consolas.append(card)
 
-        lista_productos.push(prod)
+        listaProductos.push(prod)
     }
 }
-
-let lista_productos = []
-
-//Traemos la ul donde vamos a cargar los productos
-let listaCarrito = document.getElementById("lista_carrito")
-//Creamos el array donde se va a almacenar los productos que eligamos
-let carrito = []
-
-cargarStorage()
-renderCarrito()
 
 //Funcion para acceder a los id de las cards
 function agregarProducto(prod){
@@ -75,18 +78,23 @@ function agregarProducto(prod){
 }
 
 function renderCarrito(){
-    listaCarrito.innerHTML = ``
     guardarStorage()
+    listaCarrito.innerHTML = ``
+
     /*Con los tres puntos, lo que haremos es trasnformar el array en una lista de argumentos, luego con el new estos argumentos pasan a formar parte de un objeto,
     y con el set los almacenamos en el nuevo array pero con la ventaja de que el SET solo tomas valores únicos, esto significa que si hay más de un número igual, 
     no lo va a tomar.
     En criollo: con los (...) sacamos los numeros de adentro del array, con el new lo trasnformamos en objeto, y con el set tomamos solo valores únicos.*/
     let carritoSinRepetir = [... new Set(carrito)]
-    carritoSinRepetir.forEach((x)=>{ //=> con el id q nos llega, lo comparamos con el id de el array lista_productos, y lo guardamos en un NUEVO ARRAY(ya que el filter nos crea un nuevo array).
-        let item = lista_productos.filter((el) => {
-          return el.id == x
+    console.log(carritoSinRepetir)
+    carritoSinRepetir.forEach( (x) => { //=> con el id q nos llega, lo comparamos con el id de el array lista_productos, y lo guardamos en un NUEVO ARRAY(ya que el filter nos crea un nuevo array).
+        
+        //Obtenemos el id que necesitamos de la lista de productos
+        let item = listaProductos.filter((prod)=>{
+            return prod.id === parseInt(x);
         })
-        let cantidad = carrito.reduce((acum, id)=>{  //Con un reduce, a cada objeto lo 
+        console.log(item)
+        const cantidad = carrito.reduce((acum, id) => {  //Con un reduce, a cada objeto lo 
             return id === x ? acum += 1 : acum
         },0)
         //creamos las cards de carrito
