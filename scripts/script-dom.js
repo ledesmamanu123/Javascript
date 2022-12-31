@@ -2,25 +2,20 @@
 //Traemos la seccion de consolas para trabajar sobre ella
 let seccion_consolas = document.getElementById("consolas")
 
+let carrito = []
+
+let listaProductos = []
 //Usamos la informacion desde data.json
 fetch('../data/data.json')
 .then((response)=>response.json())
 .then((data)=> render(data))
 .catch((data)=>console.log(data))
 
-
 //Traemos la ul donde vamos a cargar los productos
 let listaCarrito = document.getElementById("lista_carrito")
 
 //Creamos el array donde se va a almacenar los productos que eligamos
-let carrito = []
 
-let listaProductos = []
-
-console.log(carrito)
-cargarStorage()
-console.log(carrito)
-renderCarrito()
 
 function render(datos){
     seccion_consolas.innerHTML = ""
@@ -56,6 +51,7 @@ function render(datos){
 
         listaProductos.push(prod)
     }
+    renderCarrito()
 }
 
 //Funcion para acceder a los id de las cards
@@ -76,6 +72,9 @@ function agregarProducto(prod){
             }
           }).showToast();
 }
+
+console.log(carrito)
+cargarStorage()
 
 function renderCarrito(){
     guardarStorage()
@@ -164,3 +163,16 @@ function cargarStorage(){
         carrito = JSON.parse(localStorage.getItem("carrito"))
     }
 }
+
+/*ACTUALIZCIÓN FINAL DEL PROYECTO
+    El error de cargar los productos del carrito que estaban alojados en el localStorage, se resolvio del la siguiente manera:
+    Cuando el fetch carga los datos, como es una petición asíncrona, el código js sigue su curso, sin tener los datos cargados. Entonces cuando 
+    ejecutamos la funcion renderCarrito() fuera de render(), empieza a comparar el carrito que trae desde el localStorage con la listaProductos que
+    todavia no cargo, por esto el array item[] que se genera usando el .filter sobre listaProductos[] está indefinido. Y no puede renderizar los 
+    productos del carrito. 
+
+    Para resolver este problema, lo que hicimos fue, llamar a la funcion renderCarrito() cuando los productos ya estaban pusheados en el array de listaProductos[].
+    por eso lo ejecutamos dentro de la funcion render(). Para que primero cargue los productos y despues ejecute la función.
+
+    Gracias Samuu!!
+*/
